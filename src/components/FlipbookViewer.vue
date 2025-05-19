@@ -1,27 +1,45 @@
 <template>
-  <flipbook
-  class="flipbook"
-  :pages="pages"
-  :pagesInRange="[0, 0]"  
-    :startPage="0" 
-  />
+  <div 
+    id="flipbook-container"
+    @touchstart.passive="handleTouchStart"
+  >
+    <flipbook
+      class="flipbook"
+      :pages="pages"
+      :pagesInRange="[0, 0]"  
+      :startPage="0" 
+    />
+  </div>
 </template>
 
 <script setup>
 import Flipbook from 'flipbook-vue'
-import { ref, computed, defineProps } from 'vue'
+import { ref, computed, defineProps, onMounted } from 'vue'
 
 const props = defineProps({
   folderName: {
     type: String,
     required: true,
-    default: 'antojitos' // Valor por defecto si no se proporciona
+    default: 'antojitos'
   },
   pageCount: {
     type: Number,
     required: true,
-    default: 5 // Valor por defecto si no se proporciona
+    default: 5
   }
+})
+
+// Detección táctil pasiva
+const hasTouch = ref(false)
+const handleTouchStart = () => {
+  hasTouch.value = true
+}
+
+// Alternativa con addEventListener (se activa automáticamente)
+onMounted(() => {
+  window.addEventListener('touchstart', () => {
+    hasTouch.value = true
+  }, { passive: true })
 })
 
 const pages = computed(() => {
@@ -39,4 +57,5 @@ const pages = computed(() => {
   height: 90vh;
   margin: 0 auto;
 }
+
 </style>
