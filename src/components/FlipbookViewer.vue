@@ -2,26 +2,17 @@
   <flipbook class="flipbook" :pages="pages" />
 </template>
 
-<script>
+<script setup>
 import Flipbook from 'flipbook-vue'
+import { ref } from 'vue'
 
-export default {
-  name: 'FlipbookViewer',
-  components: {
-    Flipbook
-  },
-  data() {
-    return {
-      pages: [
-        'menus/antojitos/antojitos1.jpg',
-        'menus/antojitos/antojitos2.jpg',
-        'menus/antojitos/antojitos3.jpg',
-        'menus/antojitos/antojitos4.jpg',
-        'menus/antojitos/antojitos5.jpg'
-      ]
-    }
-  }
-}
+const pages = ref([
+  'menus/antojitos/hoja1.jpg',
+  'menus/antojitos/hoja2.jpg',
+  'menus/antojitos/hoja3.jpg',
+  'menus/antojitos/hoja4.jpg',
+  'menus/antojitos/hoja5.jpg'
+])
 </script>
 
 <style>

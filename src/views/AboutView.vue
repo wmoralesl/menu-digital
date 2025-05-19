@@ -8,7 +8,6 @@ export default {
 
 <template>
   <div class="menu">
-    <h1>This is an about page</h1>
         <FlipbookViewer />
 
   </div>
