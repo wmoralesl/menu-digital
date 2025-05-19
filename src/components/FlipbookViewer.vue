@@ -1,5 +1,10 @@
 <template>
-  <flipbook class="flipbook" :pages="pages" />
+  <flipbook
+  class="flipbook"
+  :pages="pages"
+  :pagesInRange="[0, 0]"  
+    :startPage="0" 
+  />
 </template>
 
 <script setup>
@@ -32,5 +37,6 @@ const pages = computed(() => {
 .flipbook {
   width: 90vw;
   height: 90vh;
+  margin: 0 auto;
 }
 </style>
