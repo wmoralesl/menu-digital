@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import menu from '../views/AboutView.vue'
+import AntojitosCentro from '../views/AntojitosCentro.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/menu',
-      name: 'menu',
-      component: menu,
+      path: '/antojitoselcentro',
+      name: 'antojitoscentro',
+      component: AntojitosCentro,
     },
   ],
 })

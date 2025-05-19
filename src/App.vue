@@ -7,12 +7,19 @@ import { RouterLink, RouterView } from 'vue-router'
 
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/menu">About</RouterLink>
+        <RouterLink class="link" to="/">Home</RouterLink>
+        <RouterLink class="link" to="/antojitoselcentro">Antojitos</RouterLink>
+        <RouterLink class="link" to="/paisajes">Paisajes</RouterLink>
       </nav>
   </header>
 
   <RouterView />
 </template>
+
+<style>
+.link{
+  color: white;
+}
+</style>
 
 

@@ -4,15 +4,28 @@
 
 <script setup>
 import Flipbook from 'flipbook-vue'
-import { ref } from 'vue'
+import { ref, computed, defineProps } from 'vue'
 
-const pages = ref([
-  'menus/antojitos/hoja1.jpg',
-  'menus/antojitos/hoja2.jpg',
-  'menus/antojitos/hoja3.jpg',
-  'menus/antojitos/hoja4.jpg',
-  'menus/antojitos/hoja5.jpg'
-])
+const props = defineProps({
+  folderName: {
+    type: String,
+    required: true,
+    default: 'antojitos' // Valor por defecto si no se proporciona
+  },
+  pageCount: {
+    type: Number,
+    required: true,
+    default: 5 // Valor por defecto si no se proporciona
+  }
+})
+
+const pages = computed(() => {
+  const pageArray = []
+  for (let i = 1; i <= props.pageCount; i++) {
+    pageArray.push(`menus/${props.folderName}/hoja${i}.jpg`)
+  }
+  return pageArray
+})
 </script>
 
 <style>
