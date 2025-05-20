@@ -14,7 +14,7 @@
 
 <script setup>
 import Flipbook from 'flipbook-vue'
-import { ref, computed, defineProps, onMounted } from 'vue'
+import { ref, computed, defineProps, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   folderName: {
@@ -29,18 +29,15 @@ const props = defineProps({
   }
 })
 
-// Detección táctil pasiva
 const hasTouch = ref(false)
+
+// Solo un manejador de eventos
 const handleTouchStart = () => {
   hasTouch.value = true
 }
 
-// Alternativa con addEventListener (se activa automáticamente)
-onMounted(() => {
-  window.addEventListener('touchstart', () => {
-    hasTouch.value = true
-  }, { passive: true })
-})
+// Elimina el event listener del onMounted para evitar duplicados
+// O usa solo uno de los dos enfoques (template o addEventListener)
 
 const pages = computed(() => {
   const pageArray = []
@@ -57,5 +54,4 @@ const pages = computed(() => {
   height: 90vh;
   margin: 0 auto;
 }
-
 </style>
