@@ -53,75 +53,68 @@
       </div>
     </Flipbook>
     <p class="credit">
-      Desarrollador por
+      Desarrollado por
       <a href="https://unsplash.com/" target="_blank">Punto Gráfico</a>.
     </p>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
 import Flipbook from 'flipbook-vue'
 
-export default {
-  components: { Flipbook },
-  data() {
-    return {
-      pages: [],
-      pagesHiRes: [],
-      hasMouse: true,
-      pageNum: null,
-    }
-  },
-  methods: {
-    onFlipLeftStart(page) { console.log('flip-left-start', page) },
-    onFlipLeftEnd(page) {
-      console.log('flip-left-end', page);
-      window.location.hash = '#' + page;
-    },
-    onFlipRightStart(page) { console.log('flip-right-start', page) },
-    onFlipRightEnd(page) {
-      console.log('flip-right-end', page);
-      window.location.hash = '#' + page;
-    },
-    onZoomStart(zoom) { console.log('zoom-start', zoom) },
-    onZoomEnd(zoom) { console.log('zoom-end', zoom) },
-    setPageFromHash() {
-      const n = parseInt(window.location.hash.slice(1), 10);
-      if (isFinite(n)) this.pageNum = n;
-    },
-  },
-  mounted() {
-    window.addEventListener('keydown', (ev) => {
-      const flipbook = this.$refs.flipbook;
-      if (!flipbook) return;
-      if (ev.keyCode == 37 && flipbook.canFlipLeft) flipbook.flipLeft();
-      if (ev.keyCode == 39 && flipbook.canFlipRight) flipbook.flipRight();
-    });
+const pages = ref([])
+const pagesHiRes = ref([])
+const hasMouse = ref(true)
+const pageNum = ref(null)
+const flipbook = ref(null)
 
-    // Simular carga asíncrona de páginas
-    setTimeout(() => {
-      this.pages = [
-        null,
-        'menus/prueba/hoja1.jpg',
-        'menus/prueba/hoja2.jpg',
-        'menus/prueba/hoja3.jpg',
-        'menus/prueba/hoja4.jpg',
+const onFlipLeftStart = (page) => { console.log('flip-left-start', page) }
+const onFlipLeftEnd = (page) => {
+  console.log('flip-left-end', page)
+  window.location.hash = '#' + page
+}
+const onFlipRightStart = (page) => { console.log('flip-right-start', page) }
+const onFlipRightEnd = (page) => {
+  console.log('flip-right-end', page)
+  window.location.hash = '#' + page
+}
+const onZoomStart = (zoom) => { console.log('zoom-start', zoom) }
+const onZoomEnd = (zoom) => { console.log('zoom-end', zoom) }
 
-      ];
-      this.pagesHiRes = [
-        null,
-        'menus/prueba/hoja1.jpg',
-        'menus/prueba/hoja2.jpg',
-        'menus/prueba/hoja3.jpg',
-        'menus/prueba/hoja4.jpg',
+const setPageFromHash = () => {
+  const n = parseInt(window.location.hash.slice(1), 10)
+  if (isFinite(n)) pageNum.value = n
+}
 
-      ];
-    }, 1);
+onMounted(() => {
+  window.addEventListener('keydown', (ev) => {
+    if (!flipbook.value) return
+    if (ev.keyCode == 37 && flipbook.value.canFlipLeft) flipbook.value.flipLeft()
+    if (ev.keyCode == 39 && flipbook.value.canFlipRight) flipbook.value.flipRight()
+  })
 
-    window.addEventListener('hashchange', this.setPageFromHash);
-    this.setPageFromHash();
-  },
-};
+  // Simular carga asíncrona de páginas
+  setTimeout(() => {
+    pages.value = [
+      null,
+      'menus/antojitos/hoja1.jpg',
+      'menus/antojitos/hoja2.jpg',
+      'menus/antojitos/hoja3.jpg',
+      'menus/antojitos/hoja4.jpg',
+    ]
+    pagesHiRes.value = [
+      null,
+      'menus/antojitos/hoja1.jpg',
+      'menus/antojitos/hoja2.jpg',
+      'menus/antojitos/hoja3.jpg',
+      'menus/antojitos/hoja4.jpg',
+    ]
+  }, 1)
+
+  window.addEventListener('hashchange', setPageFromHash)
+  setPageFromHash()
+})
 </script>
 
 <style>
@@ -154,7 +147,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px; /* Espacio entre botones */
+  gap: 15px;
 }
 
 .action-bar .btn {
