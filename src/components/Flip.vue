@@ -54,7 +54,7 @@
     </Flipbook>
     <p class="credit">
       Desarrollado por
-      <a href="https://unsplash.com/" target="_blank">Punto Gráfico</a>.
+      <a href="https://puntografico.site/" target="_blank">Punto Gráfico</a>.
     </p>
   </div>
 </template>
