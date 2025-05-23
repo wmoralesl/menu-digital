@@ -97,14 +97,12 @@ onMounted(() => {
   // Simular carga asíncrona de páginas
   setTimeout(() => {
     pages.value = [
-      null,
       'menus/antojitos/hoja1.jpg',
       'menus/antojitos/hoja2.jpg',
       'menus/antojitos/hoja3.jpg',
       'menus/antojitos/hoja4.jpg',
     ]
     pagesHiRes.value = [
-      null,
       'menus/antojitos/hoja1.jpg',
       'menus/antojitos/hoja2.jpg',
       'menus/antojitos/hoja3.jpg',
