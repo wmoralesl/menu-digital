@@ -6,7 +6,6 @@ import pruebaFlipBook from '@/components/pruebaFlipBook.vue';
 <template>
   <main>
     <NavigationBar />
-      <pruebaFlipBook folder-name="antojitos" :page-count="5" />
-   <h1>Hola</h1>
+      <pruebaFlipBook folder-name="prueba" :page-count="4" />
   </main>
 </template>
