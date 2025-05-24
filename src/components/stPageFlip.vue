@@ -7,7 +7,12 @@
     </div>
 
     <div class="flip-book" ref="bookRef">
-      <div
+      <div class="page page-cover page-cover-top" data-density="hard">
+        <div class="page-content">
+          <h2>MENÚ</h2>
+        </div>
+    </div>
+        <div
         v-for="(page, index) in pages"
         :key="index"
         class="page"
