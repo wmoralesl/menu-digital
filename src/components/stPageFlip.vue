@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="controls">
-      <button @click="flipPrev">← Anterior</button>
-      [<span>{{ currentPage + 1 }}</span> de <span>{{ totalPages }}</span>]
-      <button @click="flipNext">Siguiente →</button>
+      <button @click="flipPrev">&#60;</button>
+      <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+      <button @click="flipNext">&#62;</button>
     </div>
 
     <div class="flip-book" ref="bookRef">
@@ -11,8 +11,8 @@
         <div class="page-content">
           <h2>MENÚ</h2>
         </div>
-    </div>
-        <div
+      </div>
+      <div
         v-for="(page, index) in pages"
         :key="index"
         class="page"
@@ -49,9 +49,13 @@ const flipNext = () => pageFlip?.flipNext()
 const flipPrev = () => pageFlip?.flipPrev()
 
 onMounted(() => {
+  const isMobile = window.innerWidth < 768
+  const width = isMobile ? 300 : 612
+  const height = isMobile ? 400 : 792
+
   pageFlip = new PageFlip(bookRef.value, {
-    width: 612,
-    height: 792,
+    width,
+    height,
     size: 'fixed',
     showCover: false,
     maxShadowOpacity: 0.5,
@@ -59,7 +63,6 @@ onMounted(() => {
   })
 
   pageFlip.loadFromHTML(bookRef.value.querySelectorAll('.page'))
-
   totalPages.value = pageFlip.getPageCount()
 
   pageFlip.on('flip', (e) => {
@@ -74,20 +77,30 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .container {
-  max-width: 700px;
+  max-width: 100%;
+  padding: 10px;
   margin: auto;
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
   font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.controls button {
+   font-size: 14px;
+    color: #333;
+  padding: 5px 10px;
+  border: 1px solid #6d6d6d;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .flip-book {
-  width: 612px;
-  height: 792px;
   margin: auto;
 }
 
@@ -101,4 +114,16 @@ onBeforeUnmount(() => {
   background-size: cover;
   background-position: center;
 }
+
+.page-cover-top .page-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 24px;
+  font-weight: bold;
+  background: #f2f2f2;
+}
+
+
 </style>
