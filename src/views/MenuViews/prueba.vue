@@ -1,5 +1,5 @@
 <script setup>
-import FlipbookViewer from '@/components/FlipbookViewer.vue'
+import FlipbookViewer from '@/components/stPageFlip.vue'
 </script>
 
 <template>
