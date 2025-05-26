@@ -72,12 +72,10 @@ const flipbook = ref(null)
 const onFlipLeftStart = (page) => { console.log('flip-left-start', page) }
 const onFlipLeftEnd = (page) => {
   console.log('flip-left-end', page)
-  window.location.hash = '#' + page
 }
 const onFlipRightStart = (page) => { console.log('flip-right-start', page) }
 const onFlipRightEnd = (page) => {
   console.log('flip-right-end', page)
-  window.location.hash = '#' + page
 }
 const onZoomStart = (zoom) => { console.log('zoom-start', zoom) }
 const onZoomEnd = (zoom) => { console.log('zoom-end', zoom) }

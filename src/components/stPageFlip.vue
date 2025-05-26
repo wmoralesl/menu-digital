@@ -1,17 +1,16 @@
 <template>
   <div class="container">
-    <div class="controls">
-      <button @click="flipPrev">&#60;</button>
+    <div class="information">
+      <!-- <button @click="flipPrev">&#60;</button> -->
       <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
-      <button @click="flipNext">&#62;</button>
+      <!-- <button @click="flipNext">&#62;</button> -->
     </div>
 
     <div class="flip-book" ref="bookRef">
-      <div class="page page-cover page-cover-top" data-density="hard">
-        <div class="page-content">
-          <h2>MENÚ</h2>
-        </div>
-      </div>
+      <div class="controls">
+    <button>&#60;</button>
+    <button>&#62;</button>
+  </div>
       <div
         v-for="(page, index) in pages"
         :key="index"
@@ -50,8 +49,8 @@ const flipPrev = () => pageFlip?.flipPrev()
 
 onMounted(() => {
   const isMobile = window.innerWidth < 768
-  const width = isMobile ? 300 : 612
-  const height = isMobile ? 400 : 792
+  const width = isMobile ? Math.min(window.innerWidth - 20, 500) : 612
+  const height = isMobile ? Math.floor(width * 1.33) : 792
 
   pageFlip = new PageFlip(bookRef.value, {
     width,
@@ -83,30 +82,52 @@ onBeforeUnmount(() => {
 }
 
 .controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  margin-bottom: 10px;
+  position: relative;
 }
 
 .controls button {
-   font-size: 14px;
-    color: #333;
-  padding: 5px 10px;
+  position: absolute;
+  bottom: 10px;
+  padding: 8px 12px;
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
   border: 1px solid #6d6d6d;
   border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  cursor: default; /* no pointer cursor if they don’t do anything */
+  pointer-events: none; /* prevent click */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.controls button:first-child {
+  left: 10px;
+}
+
+.controls button:last-child {
+  right: 10px;
+}
+
+.controls span {
+  display: none; /* hide the page number if not needed */
+}
+
+.information{
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: small;
+  color: #9b9b9b;
 }
 
 .flip-book {
   margin: auto;
+  position: relative;
+  width: fit-content;
 }
 
 .page {
-  background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 100% !important; /* importante para sobrescribir el tamaño generado por PageFlip */
+  height: 100% !important;
+  max-width: 100%;
 }
 
 .page-image {
@@ -125,5 +146,14 @@ onBeforeUnmount(() => {
   background: #f2f2f2;
 }
 
+@media (max-width: 767px) {
+  .flip-book {
+    width: 100% !important;
+  }
 
+  .page {
+    width: 95vw !important;
+    height: auto ;
+  }
+}
 </style>
